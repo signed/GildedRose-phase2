@@ -4,3 +4,7 @@
 build/
 out/
 target/
+
+.settings
+.classpath
+.project
