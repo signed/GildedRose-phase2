@@ -17,7 +17,6 @@ public class GildedRoseTest {
 
 		assertThat(item.quality, CoreMatchers.is(11));
 	}
-
 	
 	@Test
 	public void whenDayPasses_normalItem_shouldDecreaseQualityByOne()
