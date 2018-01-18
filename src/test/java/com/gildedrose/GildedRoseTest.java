@@ -8,9 +8,8 @@ import org.junit.Test;
 public class GildedRoseTest {
 
 	@Test
-	public void whenDayPasses_itemAgedBrie_shouldIncreaseQualityByOne()
-			throws Exception {
-		Item item = new Item(getAgedBrie(), notSellinDatePassed(), 10);
+	public void whenDayPasses_itemAgedBrie_shouldIncreaseQualityByOne() {
+		Item item = new Item(getAgedBrie(), notSellInDatePassed(), 10);
 		GildedRose app = createApp(item);
 
 		app.updateQuality();
@@ -19,34 +18,31 @@ public class GildedRoseTest {
 	}
 	
 	@Test
-	public void whenDayPasses_normalItem_shouldDecreaseQualityByOne()
-			throws Exception {
-		Item item = new Item(anyName(), notSellinDatePassed(), 10);
+	public void whenDayPasses_normalItem_shouldDecreaseQualityByOne() {
+		Item item = new Item(anyName(), notSellInDatePassed(), 10);
 		GildedRose app = createApp(item);
 		app.updateQuality();
 		assertThat(item.quality, CoreMatchers.is(9));
 	}
 
 	@Test
-	public void whenDayPasses_normalItem_shouldDecreaseDaysLeftByOne()
-			throws Exception {
-		Item item = new Item(anyName(), notSellinDatePassed(), 10);
+	public void whenDayPasses_normalItem_shouldDecreaseDaysLeftByOne() {
+		Item item = new Item(anyName(), notSellInDatePassed(), 10);
 		GildedRose app = createApp(item);
 		app.updateQuality();
-		assertThat(item.sellIn, CoreMatchers.is(notSellinDatePassed() - 1));
+		assertThat(item.sellIn, CoreMatchers.is(notSellInDatePassed() - 1));
 	}
 	
 	@Test
-	public void whenDayPasses_itemSulfuras__shouldNotChangeQuality() throws Exception {
-		Item item = new Item("Sulfuras, Hand of Ragnaros", notSellinDatePassed(), anyQuality());
+	public void whenDayPasses_itemSulfuras__shouldNotChangeQuality() {
+		Item item = new Item("Sulfuras, Hand of Ragnaros", notSellInDatePassed(), anyQuality());
 		GildedRose app = createApp(item);
 		app.updateQuality();
 		assertThat(item.quality, CoreMatchers.is(anyQuality()));
 	}
 	
 	@Test
-	public void whenDayPasses_normalItemWithZeroQuality_shouldNotDecreaseQuality()
-			throws Exception {
+	public void whenDayPasses_normalItemWithZeroQuality_shouldNotDecreaseQuality() {
 		Item item = new Item(anyName(), anySellingDate(), zeroQuality());
 		GildedRose app = createApp(item);
 		app.updateQuality();
@@ -54,8 +50,7 @@ public class GildedRoseTest {
 	}
 	
 	@Test
-	public void whenDayPasses_normalItemWithNegativeSellDate_shouldDecreaseQualityeByTwo()
-			throws Exception {
+	public void whenDayPasses_normalItemWithNegativeSellDate_shouldDecreaseQualityByTwo() {
 		Item item = new Item(anyName(), anyNegativeSellingDate(), anyQuality());
 		GildedRose app = createApp(item);
 		app.updateQuality();
@@ -63,8 +58,7 @@ public class GildedRoseTest {
 	}
 	
 	@Test
-	public void whenDayPasses_itemAgedBrieWithQualityFifty_shouldNotIncreaseQuality()
-			throws Exception {
+	public void whenDayPasses_itemAgedBrieWithQualityFifty_shouldNotIncreaseQuality() {
 		Item item = new Item(getAgedBrie(), anySellingDate(), getMaxQuality());
 		GildedRose app = createApp(item);
 		app.updateQuality();
@@ -95,15 +89,14 @@ public class GildedRoseTest {
 
 	private GildedRose createApp(Item item) {
 		Item[] items = new Item[] { item };
-		GildedRose app = new GildedRose(items);
-		return app;
+		return new GildedRose(items);
 	}
 
 	private String getAgedBrie() {
 		return "Aged Brie";
 	}
 
-	private int notSellinDatePassed() {
+	private int notSellInDatePassed() {
 		return 3;
 	}
 
